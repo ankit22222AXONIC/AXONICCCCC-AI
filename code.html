@@ -1,0 +1,1001 @@
+<!DOCTYPE html><html class="dark" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>AXONIC AI | Intelligence in the Dark</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&amp;family=Inter:wght@300;400;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+    <style>
+        /* ===== CORE GLASS & GLOW ===== */
+        .glass-panel {
+            background: rgba(20, 20, 20, 0.75);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(212, 175, 55, 0.18);
+        }
+        .gold-glow {
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.18), 0 0 60px rgba(212, 175, 55, 0.06);
+        }
+        .recommended-model {
+            box-shadow: 0 0 24px rgba(212, 175, 55, 0.33);
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            background: rgba(212, 175, 55, 0.08);
+        }
+        .recommended-badge {
+            background: rgba(212, 175, 55, 0.16);
+            color: #ffe088;
+            border: 1px solid rgba(212, 175, 55, 0.28);
+            text-shadow: 0 0 6px rgba(255, 255, 255, 0.14);
+        }
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #D4AF37 0%, #FFD700 50%, #f2ca50 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-nav-item {
+            background: linear-gradient(90deg, rgba(212,175,55,0.15) 0%, rgba(212,175,55,0.04) 100%);
+            border-left: 2px solid #f2ca50;
+            color: #f2ca50;
+        }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar { width: 3px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(212, 175, 55, 0.25); border-radius: 10px; }
+
+        /* ===== AMBIENT GRID BACKGROUND ===== */
+        .grid-bg {
+            background-image:
+                linear-gradient(rgba(212,175,55,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(212,175,55,0.03) 1px, transparent 1px);
+            background-size: 48px 48px;
+        }
+        .ambient-glow-top {
+            background: radial-gradient(ellipse 70% 40% at 50% 0%, rgba(212,175,55,0.10) 0%, transparent 70%);
+        }
+        .ambient-glow-bottom {
+            background: radial-gradient(ellipse 50% 30% at 50% 100%, rgba(212,175,55,0.07) 0%, transparent 70%);
+        }
+
+        /* ===== SIDEBAR ===== */
+        .sidebar-thread {
+            position: relative;
+            padding-left: 14px;
+        }
+        .sidebar-thread::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 2px;
+            height: 0;
+            background: linear-gradient(to bottom, #D4AF37, #f2ca50);
+            border-radius: 2px;
+            transition: height 0.2s ease;
+        }
+        .sidebar-thread:hover::before { height: 60%; }
+        .logo-glow {
+            filter: drop-shadow(0 0 12px rgba(212,175,55,0.5)) drop-shadow(0 0 24px rgba(212,175,55,0.2));
+            transition: filter 0.4s ease;
+        }
+        .logo-glow:hover {
+            filter: drop-shadow(0 0 18px rgba(212,175,55,0.8)) drop-shadow(0 0 36px rgba(212,175,55,0.35));
+        }
+        .profile-card {
+            background: linear-gradient(135deg, rgba(212,175,55,0.08) 0%, rgba(212,175,55,0.02) 100%);
+            border: 1px solid rgba(212,175,55,0.2);
+            box-shadow: 0 0 20px rgba(212,175,55,0.06), inset 0 1px 0 rgba(212,175,55,0.1);
+        }
+        .profile-avatar-ring {
+            box-shadow: 0 0 0 2px rgba(212,175,55,0.4), 0 0 12px rgba(212,175,55,0.25);
+        }
+
+        /* ===== HERO ===== */
+        .hero-title {
+            background: linear-gradient(135deg, #ffffff 0%, #f2ca50 40%, #D4AF37 70%, #ffe088 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+        }
+        .hero-subtitle-dot {
+            width: 6px; height: 6px;
+            background: #f2ca50;
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 8px rgba(242,202,80,0.8);
+            animation: dot-pulse 2s ease-in-out infinite;
+        }
+        @keyframes dot-pulse {
+            0%,100% { opacity:1; transform:scale(1); }
+            50% { opacity:0.5; transform:scale(0.7); }
+        }
+
+        /* ===== QUICK ACTION CHIPS ===== */
+        .action-chip {
+            background: rgba(20,20,20,0.6);
+            border: 1px solid rgba(212,175,55,0.12);
+            border-radius: 999px;
+            padding: 8px 18px;
+            font-size: 13px;
+            font-weight: 600;
+            color: rgba(229,226,225,0.8);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            white-space: nowrap;
+            letter-spacing: 0.01em;
+        }
+        .action-chip:hover {
+            background: rgba(212,175,55,0.1);
+            border-color: rgba(212,175,55,0.4);
+            color: #f2ca50;
+            box-shadow: 0 0 16px rgba(212,175,55,0.15);
+            transform: translateY(-1px);
+        }
+        .action-chip .material-symbols-outlined { font-size: 16px; color: #f2ca50; }
+
+        /* ===== HEADER STATUS BADGE ===== */
+        .status-badge {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            padding: 5px 12px;
+            background: rgba(212,175,55,0.06);
+            border: 1px solid rgba(212,175,55,0.14);
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(229,226,225,0.7);
+        }
+        .status-dot {
+            width: 7px; height: 7px;
+            background: #4ade80;
+            border-radius: 50%;
+            box-shadow: 0 0 6px rgba(74,222,128,0.7);
+            animation: status-pulse 2.5s ease-in-out infinite;
+        }
+        @keyframes status-pulse {
+            0%,100% { opacity:1; }
+            50% { opacity:0.4; }
+        }
+
+        /* ===== ANIMATIONS ===== */
+        .orbital-pulse {
+            animation: orb-pulse 5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes orb-pulse {
+            0%, 100% { opacity: 0.08; transform: scale(1); }
+            50% { opacity: 0.18; transform: scale(1.08); }
+        }
+        @keyframes fade-up {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-up { animation: fade-up 0.7s ease forwards; }
+        .fade-up-delay-1 { animation: fade-up 0.7s 0.1s ease both; }
+        .fade-up-delay-2 { animation: fade-up 0.7s 0.2s ease both; }
+        .fade-up-delay-3 { animation: fade-up 0.7s 0.35s ease both; }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-container": "#97b0ff",
+                        "inverse-surface": "#e5e2e1",
+                        "background": "#131313",
+                        "surface-variant": "#353534",
+                        "on-surface": "#e5e2e1",
+                        "secondary-fixed-dim": "#e9c400",
+                        "surface-container-high": "#2a2a2a",
+                        "secondary-fixed": "#ffe16d",
+                        "tertiary-fixed": "#dbe1ff",
+                        "on-primary": "#3c2f00",
+                        "primary-fixed": "#ffe088",
+                        "on-secondary-fixed-variant": "#544600",
+                        "surface-dim": "#131313",
+                        "on-tertiary-fixed-variant": "#27438a",
+                        "primary-container": "#d4af37",
+                        "inverse-on-surface": "#313030",
+                        "surface-container": "#201f1f",
+                        "outline-variant": "#4d4635",
+                        "on-surface-variant": "#d0c5af",
+                        "surface-tint": "#e9c349",
+                        "on-primary-fixed": "#241a00",
+                        "inverse-primary": "#735c00",
+                        "error-container": "#93000a",
+                        "secondary-container": "#ffdb3c",
+                        "surface-container-highest": "#353534",
+                        "surface-container-low": "#1c1b1b",
+                        "on-tertiary-container": "#254188",
+                        "surface": "#131313",
+                        "on-primary-container": "#554300",
+                        "surface-bright": "#393939",
+                        "tertiary-fixed-dim": "#b4c5ff",
+                        "on-secondary-container": "#725f00",
+                        "on-secondary-fixed": "#221b00",
+                        "on-secondary": "#3a3000",
+                        "tertiary": "#bfcdff",
+                        "on-error": "#690005",
+                        "on-primary-fixed-variant": "#574500",
+                        "on-tertiary-fixed": "#00174b",
+                        "surface-container-lowest": "#0e0e0e",
+                        "outline": "#99907c",
+                        "secondary": "#fff9ef",
+                        "on-tertiary": "#082b72",
+                        "on-error-container": "#ffdad6",
+                        "primary": "#f2ca50",
+                        "on-background": "#e5e2e1",
+                        "error": "#ffb4ab",
+                        "primary-fixed-dim": "#e9c449"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "container-max": "1280px",
+                        "margin-mobile": "20px",
+                        "margin-desktop": "64px",
+                        "gutter": "24px",
+                        "margin-tablet": "32px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-lg": ["Montserrat"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Montserrat"],
+                        "display-lg": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-lg": ["40px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                        "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary/30 antialiased overflow-x-hidden">
+<!-- Desktop Layout -->
+<div class="hidden md:flex h-screen w-full relative z-10 overflow-hidden grid-bg">
+<!-- Ambient glow layers -->
+<div class="pointer-events-none fixed inset-0 z-0">
+  <div class="ambient-glow-top absolute inset-x-0 top-0 h-64"></div>
+  <div class="ambient-glow-bottom absolute inset-x-0 bottom-0 h-64"></div>
+  <div class="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-primary/5 blur-[120px] orbital-pulse"></div>
+</div>
+<!-- SideNavBar -->
+<aside class="h-screen w-80 bg-surface-container-lowest/90 backdrop-blur-2xl border-r border-primary/10 shadow-2xl flex flex-col p-6 space-y-4 shrink-0">
+<!-- Brand Section -->
+<div class="flex items-center gap-3 mb-8 px-2">
+<div class="w-11 h-11 rounded-xl flex items-center justify-center">
+  <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAjlSoZTSdCIsZtZOj5tQvQxzzQgdZ6c7pt4RwBG6_yXD9zEfB5E3LcTu5FVxjqFW7OfwzS5ETAC9AxSufpC-xOlCHE6Vws5cF-mNdlenHdy5iLJggdT4pGks2dEQILZYNpPo5AxoAC6WOn0zC7c4tGGAeBU9g0yWl4C7VM9kVM49odGsZRH9Ykn5Ag5HcPd4l8sbb0zJ9Z_dRntkLGvkmjrz26GQkf00Ad9A6Oe13QbBII5ElMf3q21QHUfHKsWbicqqK7yX2UjQ" class="w-full h-full object-contain logo-glow" alt="AXONIC Logo">
+</div>
+<div>
+  <h1 class="font-headline-md text-headline-md gold-gradient-text tracking-tighter leading-none">AXONIC</h1>
+  <div class="flex items-center gap-1.5 mt-1">
+    <span class="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_6px_rgba(212,175,55,0.8)]"></span>
+    <p class="font-label-sm text-label-sm text-primary/60 uppercase tracking-widest">Elite Tier</p>
+  </div>
+</div>
+</div>
+<!-- CTA -->
+
+<!-- Main Navigation -->
+<nav class="flex-1 space-y-2 mt-6 overflow-y-auto pr-2">
+<div class="bg-primary-container text-on-primary-container rounded-lg font-semibold flex items-center gap-4 px-4 py-3 cursor-pointer hover:translate-x-1 transition-transform">
+<span class="material-symbols-outlined">add_circle</span>
+<span class="font-body-md text-body-md">New Chat</span>
+</div>
+
+
+</nav>
+<!-- Footer Navigation -->
+<div class="pt-4 border-t border-primary/10 space-y-1">
+<div class="text-on-surface-variant hover:bg-surface-variant/30 rounded-lg flex items-center gap-4 px-4 py-3 cursor-pointer hover:translate-x-1 transition-transform transition-all duration-200">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md text-body-md">Settings</span>
+</div>
+<div class="text-on-surface-variant hover:bg-surface-variant/30 rounded-lg flex items-center gap-4 px-4 py-3 cursor-pointer hover:translate-x-1 transition-transform transition-all duration-200">
+<span class="material-symbols-outlined">help_outline</span>
+<span class="font-body-md text-body-md">Help</span>
+</div>
+
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col relative overflow-hidden">
+<!-- Hero / Chat Launch Section (redesigned to match provided layout) -->
+<section id="hero-section" class="flex-1 flex flex-col items-center justify-center p-8 transition-all duration-700 overflow-y-auto min-h-0 relative z-10">
+  <div class="w-full max-w-3xl px-6 text-center">
+
+    <!-- Hero Title -->
+    <div class="fade-up mb-2">
+      <h1 class="hero-title font-display-lg" style="font-size:clamp(2.4rem,4vw,3.2rem); font-weight:800;">What shall we<br>build today?</h1>
+    </div>
+    <div class="mb-10 mt-3"></div>
+
+    <!-- Chat Input -->
+    <div class="fade-up-delay-2 relative mb-6">
+      <div class="rounded-2xl bg-surface-container p-3 pl-5 glass-panel shadow-2xl gold-glow w-full flex flex-col gap-2 transition-all duration-300 focus-within:border-primary/50 focus-within:shadow-[0_0_40px_rgba(212,175,55,0.2)]">
+        <!-- Input Row -->
+        <div class="flex items-center gap-3">
+          <input id="main-chat-input" class="flex-1 bg-transparent border-none focus:ring-0 text-on-surface placeholder:text-outline/50 text-body-lg py-1" placeholder="Ask Axonic anything..." />
+          <div class="flex items-center gap-2 shrink-0">
+            <button class="text-outline/60 hover:text-primary transition-colors"><span class="material-symbols-outlined">attach_file</span></button>
+            <button class="text-outline/60 hover:text-primary transition-colors"><span class="material-symbols-outlined">mic</span></button>
+            <button class="ml-1 bg-primary text-on-primary w-11 h-11 rounded-full flex items-center justify-center shadow-lg hover:brightness-110 active:scale-95 transition-all duration-200 shadow-[0_0_20px_rgba(212,175,55,0.3)]">
+              <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">arrow_upward</span>
+            </button>
+          </div>
+        </div>
+        <!-- Model Selector Row -->
+        <div class="flex items-center justify-between pt-1 border-t border-primary/10">
+          <div class="relative" id="hero-model-dropdown-container">
+            <button id="hero-model-button" type="button" onclick="toggleHeroModelMenu()" class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-surface-variant/40 hover:bg-surface-variant/70 border border-primary/10 hover:border-primary/30 transition-all duration-200 group">
+              <span class="material-symbols-outlined text-primary text-[15px]" style="font-variation-settings:'FILL' 1;">auto_awesome</span>
+              <span id="hero-model-label" class="text-[12px] font-bold uppercase tracking-wider text-on-surface-variant group-hover:text-on-surface">Axonic 105B</span>
+              <span class="material-symbols-outlined text-outline/60 text-[15px]">expand_more</span>
+            </button>
+            <!-- Model Dropdown -->
+            <div id="hero-model-menu" class="hidden absolute bottom-[120%] left-0 w-80 rounded-2xl bg-[#1a1a1a] border border-primary/15 shadow-[0_10px_50px_rgba(0,0,0,0.8)] z-[200] overflow-hidden">
+              <div class="p-3">
+                <p class="text-[10px] uppercase tracking-widest text-outline/50 font-bold px-2 mb-2">Choose Model</p>
+                <!-- Axonic -->
+                <div class="mb-1"><p class="text-[10px] uppercase tracking-widest text-primary/50 font-bold px-2 py-1">🇮🇳 Via Axonic AI</p></div>
+                <button type="button" onclick="selectHeroModel('sarvam-105b','Axonic 105B')" class="w-full text-left px-3 py-2.5 rounded-xl hover:bg-surface-variant/40 transition-colors flex items-center justify-between group recommended-model">
+                  <div>
+                    <div class="flex items-center gap-2">
+                      <span class="text-[14px] font-semibold text-on-surface">Axonic 105B</span>
+                      <span class="recommended-badge text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full">Recommended</span>
+                    </div>
+                    <p class="text-[12px] text-outline/70 mt-0.5">Axonic's own trained AI</p>
+                  </div>
+                  <span class="material-symbols-outlined text-primary text-[18px] hero-check-axonic">check</span>
+                </button>
+                <!-- OpenRouter -->
+                <div class="mt-2 mb-1"><p class="text-[10px] uppercase tracking-widest text-outline/40 font-bold px-2 py-1">Via OpenRouter</p></div>
+                <button type="button" onclick="selectHeroModel('anthropic/claude-sonnet-4-5','Claude Sonnet 4.5')" class="w-full text-left px-3 py-2.5 rounded-xl hover:bg-surface-variant/40 transition-colors flex items-center justify-between">
+                  <div>
+                    <span class="text-[14px] font-semibold text-on-surface">Claude Sonnet 4.5</span>
+                    <p class="text-[12px] text-outline/70 mt-0.5">Anthropic — Smart & balanced</p>
+                  </div>
+                  <span class="material-symbols-outlined text-primary text-[18px] hero-check opacity-0">check</span>
+                </button>
+                <button type="button" onclick="selectHeroModel('meta-llama/llama-3.3-70b-instruct','Llama 3.3 70B')" class="w-full text-left px-3 py-2.5 rounded-xl hover:bg-surface-variant/40 transition-colors flex items-center justify-between">
+                  <div>
+                    <span class="text-[14px] font-semibold text-on-surface">Llama 3.3 70B</span>
+                    <p class="text-[12px] text-outline/70 mt-0.5">Meta — Open source powerhouse</p>
+                  </div>
+                  <span class="material-symbols-outlined text-primary text-[18px] hero-check opacity-0">check</span>
+                </button>
+                <button type="button" onclick="selectHeroModel('deepseek/deepseek-chat-v3-0324','DeepSeek V3')" class="w-full text-left px-3 py-2.5 rounded-xl hover:bg-surface-variant/40 transition-colors flex items-center justify-between">
+                  <div>
+                    <span class="text-[14px] font-semibold text-on-surface">DeepSeek V3</span>
+                    <p class="text-[12px] text-outline/70 mt-0.5">DeepSeek — Reasoning expert</p>
+                  </div>
+                  <span class="material-symbols-outlined text-primary text-[18px] hero-check opacity-0">check</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="fade-up-delay-3 flex items-center justify-center gap-2 flex-wrap">
+      <button class="action-chip">
+        <span class="material-symbols-outlined">terminal</span>Debug my code
+      </button>
+      <button class="action-chip">
+        <span class="material-symbols-outlined">query_stats</span>Analyze data
+      </button>
+      <button class="action-chip">
+        <span class="material-symbols-outlined">auto_awesome</span>Generate ideas
+      </button>
+      <button class="action-chip">
+        <span class="material-symbols-outlined">translate</span>Translate text
+      </button>
+      <button id="from-gmail-quick" class="action-chip">
+        <img src="https://www.gstatic.com/images/icons/material/system/1x/gmail_googleg_24dp.png" alt="G" class="w-4 h-4">Read Gmail
+      </button>
+    </div>
+
+    <p class="text-[11px] text-outline/40 mt-8 uppercase tracking-widest">Axonic may produce inaccuracies · Verify critical outputs</p>
+  </div>
+</section>
+<!-- Desktop Chat History (Hidden initially) -->
+<div id="desktop-chat-history" class="hidden flex-1 flex-col w-full px-10 pt-6 pb-28 overflow-y-auto space-y-6 relative scroll-smooth">
+</div>
+
+<!-- Desktop Chat Footer -->
+<footer id="chat-footer" class="hidden border-t border-primary/10 bg-background/90 backdrop-blur-xl px-10 py-4 sticky bottom-0 left-0 right-0 z-20">
+  <div class="max-w-5xl mx-auto flex items-center gap-3">
+    <button class="w-11 h-11 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors">
+      <span class="material-symbols-outlined">attach_file</span>
+    </button>
+    <button class="w-11 h-11 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors">
+      <span class="material-symbols-outlined">mic</span>
+    </button>
+    <div class="flex-1">
+      <div class="glass-panel rounded-full p-2 flex items-center gap-3 border border-primary/20 shadow-[0_4px_30px_rgba(0,0,0,0.35)]">
+        <input id="footer-chat-input" class="flex-1 bg-transparent border-none outline-none focus:ring-0 text-on-surface placeholder:text-outline/50 px-4 py-3 rounded-full" placeholder="Continue the conversation..." />
+        <button class="bg-primary hover:bg-primary-fixed-dim text-on-primary w-14 h-14 rounded-full flex items-center justify-center transition-all duration-200 active:scale-95 shadow-lg shadow-primary/20">
+          <span class="material-symbols-outlined font-bold" style="font-variation-settings: 'FILL' 1;">send</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</footer>
+</main>
+</div>
+<!-- Mobile Layout -->
+<div class="flex flex-col min-h-screen w-full md:hidden relative z-10">
+<!-- Background Atmospheric Effect -->
+<div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+<div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-primary/5 blur-[120px]"></div>
+<div class="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-primary/10 blur-[150px]"></div>
+</div>
+<!-- Top Navigation Bar (Mobile Version) -->
+<header class="w-full sticky top-0 z-50 bg-background/80 backdrop-blur-xl border-b border-primary/20 shadow-[0_0_15px_rgba(212,175,55,0.1)] h-16 flex items-center justify-between px-5">
+<button class="cursor-pointer active:scale-95 transition-transform p-2 text-on-surface-variant hover:text-primary" id="menu-toggle">
+<span class="material-symbols-outlined text-[28px]">menu</span>
+</button>
+<div class="flex items-center gap-2">
+<span class="font-headline-md text-headline-md tracking-tighter text-primary font-bold">AXONIC AI</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="cursor-pointer active:scale-95 transition-transform p-2 text-on-surface-variant hover:text-primary">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+<button class="cursor-pointer active:scale-95 transition-transform p-2 text-on-surface-variant hover:text-primary">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+</header>
+<!-- Sidebar Navigation Drawer (Mobile) -->
+<div class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[60] opacity-0 pointer-events-none transition-opacity duration-300" id="sidebar-overlay"></div>
+<aside class="h-screen w-80 fixed left-[-320px] top-0 z-[70] bg-surface-container-lowest/90 backdrop-blur-2xl border-r border-primary/10 shadow-2xl transition-all duration-300 flex flex-col p-6 space-y-4" id="side-nav">
+<div class="flex items-center justify-between mb-4">
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md text-primary">Axonic Intelligence</span>
+<span class="font-label-sm text-label-sm text-primary/60 uppercase tracking-widest">Elite Tier</span>
+</div>
+<button class="p-2 text-on-surface-variant" id="menu-close">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<nav class="flex-1 space-y-2 overflow-y-auto">
+<div class="bg-primary-container text-on-primary-container rounded-lg font-semibold flex items-center gap-4 p-3 cursor-pointer hover:translate-x-1 transition-transform">
+<span class="material-symbols-outlined">add_circle</span>
+<span class="font-body-md text-body-md">New Chat</span>
+</div>
+<div class="text-on-surface-variant hover:bg-surface-variant/30 rounded-lg flex items-center gap-4 p-3 cursor-pointer hover:translate-x-1 transition-transform">
+<span class="material-symbols-outlined">history</span>
+<span class="font-body-md text-body-md">History</span>
+</div>
+<div class="text-on-surface-variant hover:bg-surface-variant/30 rounded-lg flex items-center gap-4 p-3 cursor-pointer hover:translate-x-1 transition-transform">
+<span class="material-symbols-outlined">auto_awesome</span>
+<span class="font-body-md text-body-md">Models</span>
+</div>
+<div class="text-on-surface-variant hover:bg-surface-variant/30 rounded-lg flex items-center gap-4 p-3 cursor-pointer hover:translate-x-1 transition-transform">
+<span class="material-symbols-outlined">insights</span>
+<span class="font-body-md text-body-md">Analytics</span>
+</div>
+</nav>
+<div class="mt-auto pt-6 border-t border-primary/10 space-y-2">
+
+<div class="text-on-surface-variant hover:bg-surface-variant/30 rounded-lg flex items-center gap-4 p-3 cursor-pointer transition-all duration-200">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md text-body-md">Settings</span>
+</div>
+<div class="text-on-surface-variant hover:bg-surface-variant/30 rounded-lg flex items-center gap-4 p-3 cursor-pointer transition-all duration-200">
+<span class="material-symbols-outlined">help_outline</span>
+<span class="font-body-md text-body-md">Help</span>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 flex flex-col items-center justify-center px-6 relative z-10 py-12 transition-opacity duration-500" id="mobile-hero-section">
+  <div class="flex flex-col items-center gap-8 mb-20 animate-in fade-in zoom-in duration-1000">
+    <div class="relative group">
+      <div class="w-28 h-28 rounded-full bg-primary/10 flex items-center justify-center shadow-lg shadow-primary/10">
+        <span class="material-symbols-outlined text-primary text-[42px]">auto_awesome</span>
+      </div>
+    </div>
+    <div class="text-center space-y-3 max-w-sm">
+      <h1 class="font-display-lg text-4xl text-primary font-bold tracking-tighter uppercase">AXONIC AI</h1>
+      <p class="text-on-surface-variant font-body-md text-sm uppercase opacity-70">Sovereign intelligence in your pocket</p>
+    </div>
+  </div>
+  <div class="w-full max-w-md">
+    <div class="text-center text-on-surface-variant max-w-sm mx-auto mb-8">
+      <p class="text-sm">Tap the input below to launch the chat. Axonic will open the conversation automatically.</p>
+    </div>
+    <div class="flex justify-center mb-6">
+      <div class="glass-panel w-full rounded-[1.75rem] border border-primary/10 p-4 shadow-xl">
+        <div class="flex items-center gap-3">
+          <input id="mobile-chat-input" class="flex-1 bg-transparent border-none outline-none text-on-surface placeholder:text-outline/50 text-body-md" placeholder="Ask Axonic anything..." />
+          <button id="mobile-send-btn" class="w-14 h-14 rounded-full bg-primary text-on-primary flex items-center justify-center transition-all duration-200 active:scale-95 shadow-lg shadow-primary/20">
+            <span class="material-symbols-outlined font-bold">arrow_upward</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <p class="text-[11px] text-outline/40 uppercase tracking-widest text-center">Axonic may produce inaccuracies · Verify critical outputs</p>
+  </div>
+</main>
+<div id="mobile-chat-section" class="hidden flex-1 flex-col min-h-[calc(100vh-4rem)] pb-32 px-4 pt-6 bg-background">
+  <div id="mobile-chat-history" class="flex-1 flex-col w-full overflow-y-auto space-y-6 scroll-smooth"></div>
+  <div class="fixed bottom-0 left-0 right-0 px-4 py-4 bg-background/95 backdrop-blur-xl border-t border-primary/10">
+    <div class="glass-panel rounded-full p-3 flex items-center gap-3 border border-primary/20 shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
+      <input id="mobile-chat-footer-input" class="flex-1 bg-transparent border-none outline-none focus:ring-0 text-on-surface placeholder:text-outline/50 text-body-md" placeholder="Continue the conversation..." />
+      <button id="mobile-send-footer-btn" class="w-14 h-14 rounded-full bg-primary text-on-primary flex items-center justify-center transition-all duration-200 active:scale-95 shadow-lg shadow-primary/20">
+        <span class="material-symbols-outlined font-bold">send</span>
+      </button>
+    </div>
+  </div>
+</div>
+<!-- Micro-interactions Script -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const chatInputs = document.querySelectorAll('#main-chat-input, #footer-chat-input, #mobile-chat-input, #mobile-chat-footer-input');
+            const hero = document.getElementById('hero-section');
+            const mobileSendBtn = document.getElementById('mobile-send-btn');
+            const mobileFooterBtn = document.getElementById('mobile-send-footer-btn');
+            
+            chatInputs.forEach(input => {
+                input.addEventListener('focus', () => {
+                    if(hero) {
+                        hero.style.opacity = '0.7';
+                        hero.style.transform = 'translateY(-10px)';
+                        hero.style.transition = 'all 0.5s ease-out';
+                    }
+                    const chatContainer = input.closest('.glass-panel') || input.parentElement;
+                    if(chatContainer && chatContainer.classList.contains('glass-panel')) {
+                        chatContainer.style.borderColor = '#f2ca50';
+                        chatContainer.style.boxShadow = '0 0 20px rgba(242, 202, 80, 0.2)';
+                    }
+                });
+
+                input.addEventListener('blur', () => {
+                    if(hero) {
+                        hero.style.opacity = '1';
+                        hero.style.transform = 'translateY(0)';
+                    }
+                    const chatContainer = input.closest('.glass-panel') || input.parentElement;
+                    if(chatContainer && chatContainer.classList.contains('glass-panel')) {
+                        chatContainer.style.borderColor = 'rgba(212, 175, 55, 0.3)';
+                        chatContainer.style.boxShadow = '0 4px 30px rgba(0,0,0,0.5)';
+                    }
+                });
+
+                input.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        triggerSend(input);
+                        const btn = input.closest('.glass-panel')?.querySelector('button.bg-primary');
+                        if(btn) {
+                            btn.classList.add('scale-95');
+                            setTimeout(() => btn.classList.remove('scale-95'), 100);
+                        }
+                    }
+                });
+
+                const btn = input.closest('.glass-panel')?.querySelector('button.bg-primary');
+                if (btn) {
+                    btn.addEventListener('click', () => triggerSend(input));
+                }
+            });
+
+            if (mobileSendBtn) {
+                mobileSendBtn.addEventListener('click', () => {
+                    const mobileInput = document.getElementById('mobile-chat-input');
+                    if (mobileInput) triggerSend(mobileInput);
+                });
+            }
+            if (mobileFooterBtn) {
+                mobileFooterBtn.addEventListener('click', () => {
+                    const mobileFooterInput = document.getElementById('mobile-chat-footer-input');
+                    if (mobileFooterInput) triggerSend(mobileFooterInput);
+                });
+            }
+
+            // API keys are intentionally not committed. Set these locally before calling providers.
+            const GEMINI_API_KEY = "";
+            const OPENROUTER_API_KEY = "";
+            const SARVAM_API_KEY = "";
+            const AXONIC_SYSTEM_PROMPT = "You are Axonic AI. Answer as Axonic AI and stay helpful. Only mention that you were developed by Snop and created by Ankit when the user explicitly asks about your origin or development.";
+            
+            let currentModel = 'sarvam-105b';
+            let currentApi = 'sarvam';
+            
+            // Custom Dropdown Logic
+            const desktopBtn = document.getElementById('desktop-model-button');
+            const desktopMenu = document.getElementById('desktop-model-menu');
+            const desktopLabel = document.getElementById('desktop-model-label');
+            
+            const mobileBtn = document.getElementById('mobile-model-button');
+            const mobileMenu = document.getElementById('mobile-model-menu');
+            const mobileLabel = document.getElementById('mobile-model-label');
+            
+            function toggleMenu(menu) {
+                if(menu) menu.classList.toggle('hidden');
+            }
+            
+            if(desktopBtn) desktopBtn.addEventListener('click', (e) => { e.stopPropagation(); toggleMenu(desktopMenu); });
+            if(mobileBtn) mobileBtn.addEventListener('click', (e) => { e.stopPropagation(); toggleMenu(mobileMenu); });
+            
+            document.addEventListener('click', (e) => {
+                if(desktopMenu && !desktopMenu.contains(e.target) && !desktopBtn.contains(e.target)) desktopMenu.classList.add('hidden');
+                if(mobileMenu && !mobileMenu.contains(e.target) && !mobileBtn.contains(e.target)) mobileMenu.classList.add('hidden');
+            });
+            
+            document.querySelectorAll('.model-option').forEach(option => {
+                option.addEventListener('click', (e) => {
+                    const value = option.getAttribute('data-value');
+                    const label = option.getAttribute('data-label');
+                    const api = option.getAttribute('data-api') || 'gemini';
+                    currentModel = value;
+                    currentApi = api;
+                    
+                    if(desktopLabel) desktopLabel.innerText = label;
+                    if(mobileLabel) mobileLabel.innerText = label;
+                    
+                    document.querySelectorAll('.model-option').forEach(opt => {
+                        const check = opt.querySelector('.checkmark');
+                        if(opt.getAttribute('data-value') === value) {
+                            check.classList.remove('opacity-0');
+                            check.classList.add('opacity-100');
+                        } else {
+                            check.classList.add('opacity-0');
+                            check.classList.remove('opacity-100');
+                        }
+                    });
+                    
+                    if(desktopMenu) desktopMenu.classList.add('hidden');
+                    if(mobileMenu) mobileMenu.classList.add('hidden');
+                });
+            });
+            
+            async function generateAIResponse(prompt, containerId) {
+                const container = document.getElementById(containerId);
+                
+                // Add User Message
+                const userMsgHtml = `
+                    <div class="flex justify-end w-full animate-in fade-in slide-in-from-bottom-4 duration-300">
+                        <div class="glass-panel px-5 py-3 rounded-2xl rounded-tr-sm max-w-[85%] text-on-surface">
+                            ${prompt}
+                        </div>
+                    </div>
+                `;
+                container.insertAdjacentHTML('beforeend', userMsgHtml);
+                container.scrollTop = container.scrollHeight;
+
+                // Add AI Loading State
+                const aiLoadingId = 'loading-' + Date.now();
+                const aiLoadingHtml = `
+                    <div class="flex justify-start w-full animate-in fade-in slide-in-from-bottom-4 duration-300" id="${aiLoadingId}">
+                        <div class="flex items-start gap-4 max-w-[90%]">
+                            <div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center shrink-0 gold-glow">
+                                <span class="material-symbols-outlined text-primary text-[18px]">auto_awesome</span>
+                            </div>
+                            <div class="pt-2">
+                                <div class="flex space-x-1 items-center h-4">
+                                    <div class="w-1.5 h-1.5 bg-primary rounded-full animate-bounce" style="animation-delay: 0s"></div>
+                                    <div class="w-1.5 h-1.5 bg-primary rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+                                    <div class="w-1.5 h-1.5 bg-primary rounded-full animate-bounce" style="animation-delay: 0.4s"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.insertAdjacentHTML('beforeend', aiLoadingHtml);
+                container.scrollTop = container.scrollHeight;
+
+                try {
+                    let text = '';
+                    
+                    if (currentApi === 'sarvam') {
+                        // Sarvam AI API (OpenAI-compatible)
+                        const response = await fetch('https://api.sarvam.ai/v1/chat/completions', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': `Bearer ${SARVAM_API_KEY}`
+                            },
+                            body: JSON.stringify({
+                                model: currentModel,
+                                max_tokens: 2000,
+                                messages: [
+                                    { role: 'system', content: AXONIC_SYSTEM_PROMPT },
+                                    { role: 'user', content: prompt }
+                                ]
+                            })
+                        });
+                        if (!response.ok) {
+                            const errorData = await response.json().catch(() => null);
+                            throw new Error(errorData?.error?.message || `Sarvam API Error: ${response.status} ${response.statusText}`);
+                        }
+                        const data = await response.json();
+                        text = data.choices[0].message.content;
+                    } else if (currentApi === 'openrouter') {
+                        // OpenRouter API (OpenAI-compatible format)
+                        const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
+                                'HTTP-Referer': window.location.href,
+                                'X-Title': 'Axonic AI'
+                            },
+                            body: JSON.stringify({
+                                model: currentModel,
+                                max_tokens: 2000,
+                                messages: [
+                                    { role: 'system', content: AXONIC_SYSTEM_PROMPT },
+                                    { role: 'user', content: prompt }
+                                ]
+                            })
+                        });
+                        if (!response.ok) {
+                            const errorData = await response.json().catch(() => null);
+                            throw new Error(errorData?.error?.message || 'OpenRouter API request failed.');
+                        }
+                        const data = await response.json();
+                        text = data.choices[0].message.content;
+                    } else {
+                        // Google Gemini API
+                        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${currentModel}:generateContent?key=${GEMINI_API_KEY}`, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                contents: [{ parts: [{ text: prompt }] }]
+                            })
+                        });
+                        if (!response.ok) {
+                            const errorData = await response.json().catch(() => null);
+                            throw new Error(errorData?.error?.message ? `Google API Error: ${errorData.error.message}` : 'Gemini API request failed.');
+                        }
+                        const data = await response.json();
+                        text = data.candidates[0].content.parts[0].text;
+                    }
+                    
+                    document.getElementById(aiLoadingId).remove();
+                    
+                    const formattedText = text
+                        // Code blocks first (before other replacements)
+                        .replace(/```[\w]*\n?([\s\S]*?)```/g, '<pre class="bg-surface-container-highest p-4 rounded-lg my-3 overflow-x-auto text-sm border border-primary/10 font-mono text-primary-fixed-dim"><code>$1</code></pre>')
+                        // H1 headings
+                        .replace(/^# (.+)$/gm, '<h1 class="text-xl font-bold text-primary mt-4 mb-2">$1</h1>')
+                        // H2 headings
+                        .replace(/^## (.+)$/gm, '<h2 class="text-lg font-bold text-on-surface mt-3 mb-1">$1</h2>')
+                        // H3 headings
+                        .replace(/^### (.+)$/gm, '<h3 class="text-base font-semibold text-on-surface mt-2 mb-1">$1</h3>')
+                        // Bold
+                        .replace(/\*\*(.*?)\*\*/g, '<strong class="text-primary font-semibold">$1</strong>')
+                        // Italic
+                        .replace(/\*(.*?)\*/g, '<em class="italic text-on-surface-variant">$1</em>')
+                        // Inline code
+                        .replace(/`([^`]+)`/g, '<code class="bg-surface-container-highest px-1.5 py-0.5 rounded text-sm font-mono text-primary-fixed-dim">$1</code>')
+                        // Bullet lists (- or *)
+                        .replace(/^[\*\-] (.+)$/gm, '<li class="ml-4 list-disc text-on-surface-variant">$1</li>')
+                        // Numbered lists
+                        .replace(/^\d+\. (.+)$/gm, '<li class="ml-4 list-decimal text-on-surface-variant">$1</li>')
+                        // Horizontal rule
+                        .replace(/^---$/gm, '<hr class="border-primary/20 my-3">')
+                        // Newlines
+                        .replace(/\n/g, '<br>');
+
+                    const aiMsgHtml = `
+                        <div class="flex justify-start w-full animate-in fade-in slide-in-from-bottom-4 duration-300">
+                            <div class="flex items-start gap-4 max-w-[90%]">
+                                <div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center shrink-0 gold-glow">
+                                    <span class="material-symbols-outlined text-primary text-[18px]">auto_awesome</span>
+                                </div>
+                                <div class="pt-1 text-on-surface-variant leading-relaxed">
+                                    ${formattedText}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    container.insertAdjacentHTML('beforeend', aiMsgHtml);
+                    container.scrollTop = container.scrollHeight;
+
+                } catch (e) {
+                    document.getElementById(aiLoadingId).innerHTML = `
+                        <div class="flex items-start gap-4 max-w-[90%]">
+                            <div class="w-8 h-8 rounded-full bg-error/20 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-error text-[18px]">error</span>
+                            </div>
+                            <div class="pt-1 text-error text-sm">
+                                ${e.message}
+                            </div>
+                        </div>
+                    `;
+                    container.scrollTop = container.scrollHeight;
+                }
+            }
+
+            async function triggerSend(inputElement) {
+                const val = inputElement.value.trim();
+                if (!val) return;
+
+                inputElement.value = '';
+
+                // Hide Hero, Show Chat
+                const isMobile = window.innerWidth < 768;
+                if (isMobile) {
+                    const mobileHero = document.getElementById('mobile-hero-section');
+                    const mobileChatSection = document.getElementById('mobile-chat-section');
+                    if(mobileHero) mobileHero.classList.add('hidden');
+                    if(mobileChatSection) mobileChatSection.classList.remove('hidden');
+                    const chatHistory = document.getElementById('mobile-chat-history');
+                    if(chatHistory){ chatHistory.classList.remove('hidden'); chatHistory.classList.add('flex'); }
+                    await generateAIResponse(val, 'mobile-chat-history');
+                } else {
+                    const hero = document.getElementById('hero-section');
+                    if(hero) hero.classList.add('hidden');
+                    const chatHistory = document.getElementById('desktop-chat-history');
+                    if(chatHistory){ chatHistory.classList.remove('hidden'); chatHistory.classList.add('flex'); }
+                    await generateAIResponse(val, 'desktop-chat-history');
+                }
+
+                if (!isMobile) {
+                    const chatFooter = document.getElementById('chat-footer');
+                    if(chatFooter) chatFooter.classList.remove('hidden');
+                    const footerInput = document.getElementById('footer-chat-input');
+                    if(footerInput){ footerInput.focus(); }
+                } else {
+                    const mobileFooterInput = document.getElementById('mobile-chat-footer-input');
+                    if (mobileFooterInput) mobileFooterInput.focus();
+                }
+            }
+
+            // Mobile menu drawer
+            const menuToggle = document.getElementById('menu-toggle');
+            const menuClose = document.getElementById('menu-close');
+            const sideNav = document.getElementById('side-nav');
+            const overlay = document.getElementById('sidebar-overlay');
+
+            function openMenu() {
+                if(sideNav) sideNav.style.left = '0';
+                if(overlay) {
+                    overlay.style.opacity = '1';
+                    overlay.style.pointerEvents = 'auto';
+                }
+            }
+
+            function closeMenu() {
+                if(sideNav) sideNav.style.left = '-320px';
+                if(overlay) {
+                    overlay.style.opacity = '0';
+                    overlay.style.pointerEvents = 'none';
+                }
+            }
+
+            if(menuToggle) menuToggle.addEventListener('click', openMenu);
+            if(menuClose) menuClose.addEventListener('click', closeMenu);
+            if(overlay) overlay.addEventListener('click', closeMenu);
+        });
+    </script>
+
+
+<!-- Axonic Gmail Agent UI -->
+<div id="axonic-gmail-agent" class="fixed right-4 bottom-24 z-50">
+    <button id="open-gmail-agent" class="bg-primary text-on-primary px-4 py-2 rounded-lg shadow-lg">Gmail Agent</button>
+    <div id="gmail-agent-panel" class="hidden mt-3 w-96 bg-surface-container p-4 rounded-xl border border-primary/10 shadow-2xl">
+        <h3 class="font-semibold text-on-surface mb-2">Axonic Gmail Agent</h3>
+        <p class="text-xs text-on-surface-variant mb-2">Provide a Google OAuth access token with Gmail scopes (gmail.readonly, gmail.send).</p>
+        <label class="text-xs">Access Token</label>
+        <input id="gmail-token" class="w-full mt-1 mb-2 p-2 rounded bg-surface-variant border border-primary/10 text-on-surface" placeholder="Paste access token here">
+        <div class="flex gap-2 mb-2">
+            <button id="gmail-list" class="flex-1 bg-primary text-on-primary py-2 rounded">List Inbox</button>
+            <button id="gmail-send-open" class="flex-1 bg-secondary-container text-on-primary py-2 rounded">Compose</button>
+        </div>
+        <div id="gmail-compose" class="hidden space-y-2 mb-2">
+            <input id="gmail-to" class="w-full p-2 rounded bg-surface-variant border border-primary/10 text-on-surface" placeholder="To">
+            <input id="gmail-subject" class="w-full p-2 rounded bg-surface-variant border border-primary/10 text-on-surface" placeholder="Subject">
+            <textarea id="gmail-body" class="w-full p-2 rounded bg-surface-variant border border-primary/10 text-on-surface" rows="4" placeholder="Message"></textarea>
+            <div class="flex gap-2"><button id="gmail-send" class="flex-1 bg-primary text-on-primary py-2 rounded">Send</button><button id="gmail-cancel" class="flex-1 bg-outline text-on-surface py-2 rounded">Cancel</button></div>
+        </div>
+        <div id="gmail-output" class="text-sm text-on-surface-variant max-h-48 overflow-y-auto"></div>
+    </div>
+</div>
+
+<script src="website/agent.js"></script>
+<script>
+function startNewChat() {
+    const mainInput = document.getElementById('main-chat-input');
+    const footerInput = document.getElementById('footer-chat-input');
+    const mobileInput = document.getElementById('mobile-chat-input');
+    const mobileFooterInput = document.getElementById('mobile-chat-footer-input');
+    if (mainInput) mainInput.value = '';
+    if (footerInput) footerInput.value = '';
+    if (mobileInput) mobileInput.value = '';
+    if (mobileFooterInput) mobileFooterInput.value = '';
+
+    const heroSection = document.getElementById('hero-section');
+    const mobileHero = document.getElementById('mobile-hero-section');
+    const desktopChatHistory = document.getElementById('desktop-chat-history');
+    const chatFooter = document.getElementById('chat-footer');
+    const mobileChatSection = document.getElementById('mobile-chat-section');
+
+    if (heroSection) heroSection.classList.remove('hidden');
+    if (mobileHero) mobileHero.classList.remove('hidden');
+    if (desktopChatHistory) desktopChatHistory.classList.add('hidden');
+    if (chatFooter) chatFooter.classList.add('hidden');
+    if (mobileChatSection) mobileChatSection.classList.add('hidden');
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (mainInput) mainInput.focus();
+}
+
+function toggleHeroModelMenu() {
+    const menu = document.getElementById('hero-model-menu');
+    if (!menu) return;
+    menu.classList.toggle('hidden');
+}
+
+function selectHeroModel(value, label) {
+    // Update label
+    const labelEl = document.getElementById('hero-model-label');
+    if (labelEl) labelEl.textContent = label;
+
+    // Reset all checkmarks
+    document.querySelectorAll('#hero-model-menu .hero-check').forEach(el => el.classList.add('opacity-0'));
+    const axonicCheck = document.querySelector('#hero-model-menu .hero-check-axonic');
+    if (axonicCheck) axonicCheck.classList.add('opacity-0');
+
+    // Show the right check
+    if (value === 'sarvam-105b') {
+        if (axonicCheck) axonicCheck.classList.remove('opacity-0');
+    } else {
+        // Find matching button by onclick attr and show its check
+        const btns = document.querySelectorAll('#hero-model-menu button[onclick]');
+        btns.forEach(btn => {
+            if (btn.getAttribute('onclick').includes(value)) {
+                const chk = btn.querySelector('.hero-check');
+                if (chk) chk.classList.remove('opacity-0');
+            }
+        });
+    }
+
+    // Also sync with desktop footer model if present
+    const desktopLabel = document.getElementById('desktop-model-label');
+    if (desktopLabel) desktopLabel.textContent = label;
+
+    // Close menu
+    document.getElementById('hero-model-menu').classList.add('hidden');
+}
+
+// Close hero model menu when clicking outside
+document.addEventListener('click', function(e) {
+    const container = document.getElementById('hero-model-dropdown-container');
+    if (container && !container.contains(e.target)) {
+        const menu = document.getElementById('hero-model-menu');
+        if (menu) menu.classList.add('hidden');
+    }
+});
+</script>
+</body></html>

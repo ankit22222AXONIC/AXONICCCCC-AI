@@ -1,0 +1,218 @@
+<!DOCTYPE html><html class="dark" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>AXONIC AI - Elite Intelligence</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Montserrat:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        body {
+            background-color: #131313;
+            color: #e5e2e1;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        .glass-panel {
+            background: rgba(30, 30, 30, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+        }
+        .gold-glow {
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.15);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-nav-item {
+            background-color: rgba(212, 175, 55, 0.1);
+            color: #f2ca50;
+        }
+        /* Custom scrollbar for chat history if needed */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(212, 175, 55, 0.2);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface antialiased min-h-screen flex flex-col">
+<!-- Background Atmospheric Effect -->
+<div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+<div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-primary/5 blur-[120px]"></div>
+<div class="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-primary/10 blur-[150px]"></div>
+</div>
+<!-- Top Navigation Bar (Mobile Version) -->
+<header class="w-full sticky top-0 z-50 bg-background/80 backdrop-blur-xl border-b border-primary/20 shadow-[0_0_15px_rgba(212,175,55,0.1)] h-16 flex items-center justify-between px-5">
+<button class="cursor-pointer active:scale-95 transition-transform p-2 text-on-surface-variant hover:text-primary" id="menu-toggle">
+<span class="material-symbols-outlined text-[28px]">menu</span>
+</button>
+<div class="flex items-center gap-2">
+<span class="font-headline-md text-headline-md tracking-tighter text-primary font-bold">AXONIC AI</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="cursor-pointer active:scale-95 transition-transform p-2 text-on-surface-variant hover:text-primary">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+<button class="cursor-pointer active:scale-95 transition-transform p-2 text-on-surface-variant hover:text-primary">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+</header>
+<!-- Sidebar Navigation Drawer (Mobile) -->
+<div class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[60] opacity-0 pointer-events-none transition-opacity duration-300" id="sidebar-overlay"></div>
+<aside class="h-screen w-80 fixed left-[-320px] top-0 z-[70] bg-surface-container-lowest/90 backdrop-blur-2xl border-r border-primary/10 shadow-2xl transition-all duration-300 flex flex-col p-6 space-y-4" id="side-nav">
+<div class="flex items-center justify-between mb-4">
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md text-primary">Axonic Intelligence</span>
+<span class="font-label-sm text-label-sm text-primary/60 uppercase tracking-widest">Elite Tier</span>
+</div>
+<button class="p-2 text-on-surface-variant" id="menu-close">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<nav class="flex-1 space-y-2 overflow-y-auto">
+<div class="bg-primary-container text-on-primary-container rounded-lg font-semibold flex items-center gap-4 p-3 cursor-pointer hover:translate-x-1 transition-transform">
+<span class="material-symbols-outlined">add_circle</span>
+<span class="font-body-md text-body-md">New Chat</span>
+</div>
+<div class="text-on-surface-variant hover:bg-surface-variant/30 rounded-lg flex items-center gap-4 p-3 cursor-pointer hover:translate-x-1 transition-transform">
+<span class="material-symbols-outlined">history</span>
+<span class="font-body-md text-body-md">History</span>
+</div>
+<div class="text-on-surface-variant hover:bg-surface-variant/30 rounded-lg flex items-center gap-4 p-3 cursor-pointer hover:translate-x-1 transition-transform">
+<span class="material-symbols-outlined">auto_awesome</span>
+<span class="font-body-md text-body-md">Models</span>
+</div>
+<div class="text-on-surface-variant hover:bg-surface-variant/30 rounded-lg flex items-center gap-4 p-3 cursor-pointer hover:translate-x-1 transition-transform">
+<span class="material-symbols-outlined">insights</span>
+<span class="font-body-md text-body-md">Analytics</span>
+</div>
+</nav>
+<div class="mt-auto pt-6 border-t border-primary/10 space-y-2">
+<div class="bg-primary/10 border border-primary/20 rounded-xl p-4 mb-4">
+<p class="text-on-surface font-semibold mb-1">Upgrade to Pro</p>
+<p class="text-on-surface-variant text-xs mb-3">Get access to GPT-4o &amp; Claude 3.5 Sonnet.</p>
+<button class="w-full bg-primary text-on-primary py-2 rounded-lg font-bold text-sm">Upgrade Now</button>
+</div>
+<div class="text-on-surface-variant hover:bg-surface-variant/30 rounded-lg flex items-center gap-4 p-3 cursor-pointer transition-all duration-200">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md text-body-md">Settings</span>
+</div>
+<div class="text-on-surface-variant hover:bg-surface-variant/30 rounded-lg flex items-center gap-4 p-3 cursor-pointer transition-all duration-200">
+<span class="material-symbols-outlined">help_outline</span>
+<span class="font-body-md text-body-md">Help</span>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 flex flex-col items-center justify-center px-6 relative z-10 py-12">
+<!-- Centered Branding Core -->
+<div class="flex flex-col items-center gap-8 mb-20 animate-in fade-in zoom-in duration-1000">
+<div class="relative group">
+<!-- Orbital Ring -->
+
+
+<div class="w-32 h-32 md:w-48 md:h-48 relative z-20">
+<img class="w-full h-full object-contain filter transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAjlSoZTSdCIsZtZOj5tQvQxzzQgdZ6c7pt4RwBG6_yXD9zEfB5E3LcTu5FVxjqFW7OfwzS5ETAC9AxSufpC-xOlCHE6Vws5cF-mNdlenHdy5iLJggdT4pGks2dEQILZYNpPo5AxoAC6WOn0zC7c4tGGAeBU9g0yWl4C7VM9kVM49odGsZRH9Ykn5Ag5HcPd4l8sbb0zJ9Z_dRntkLGvkmjrz26GQkf00Ad9A6Oe13QbBII5ElMf3q21QHUfHKsWbicqqK7yX2UjQ">
+</div>
+</div>
+<div class="text-center space-y-2">
+<h1 class="font-display-lg text-4xl md:text-5xl text-primary font-bold tracking-tighter uppercase">
+                    AXONIC AI
+                </h1>
+<p class="text-on-surface-variant font-body-md tracking-widest text-sm uppercase opacity-60">
+                    Sovereign Intelligence
+                </p>
+</div>
+</div>
+<!-- Suggestion Chips (Bento-style interaction) -->
+<div class="w-full max-w-md grid grid-cols-2 gap-3 mb-32">
+<button class="glass-panel p-4 rounded-xl text-left hover:border-primary/40 transition-all group">
+<span class="material-symbols-outlined text-primary mb-2">auto_fix</span>
+<p class="text-xs font-semibold text-on-surface group-hover:text-primary">Ideate Architecture</p>
+</button>
+<button class="glass-panel p-4 rounded-xl text-left hover:border-primary/40 transition-all group">
+<span class="material-symbols-outlined text-primary mb-2">code</span>
+<p class="text-xs font-semibold text-on-surface group-hover:text-primary">Optimized Code</p>
+</button>
+<button class="glass-panel p-4 rounded-xl text-left hover:border-primary/40 transition-all group">
+<span class="material-symbols-outlined text-primary mb-2">query_stats</span>
+<p class="text-xs font-semibold text-on-surface group-hover:text-primary">Market Analysis</p>
+</button>
+<button class="glass-panel p-4 rounded-xl text-left hover:border-primary/40 transition-all group">
+<span class="material-symbols-outlined text-primary mb-2">translate</span>
+<p class="text-xs font-semibold text-on-surface group-hover:text-primary">Multilingual Flow</p>
+</button>
+</div>
+</main>
+<!-- Sticky Bottom Chat Bar (Thumb Optimized) -->
+<div class="fixed bottom-0 left-0 right-0 p-4 pb-8 z-50 bg-gradient-to-t from-background via-background/95 to-transparent">
+<div class="max-w-md mx-auto relative">
+<div class="glass-panel rounded-full p-2 flex items-center gap-2 border border-primary/30 shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-primary hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined">attach_file</span>
+</button>
+<input class="flex-1 bg-transparent border-none focus:ring-0 text-on-surface placeholder:text-on-surface-variant/50 font-body-md py-2" placeholder="Prompt Axonic Intelligence..." type="text">
+<button class="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-on-primary shadow-[0_0_15px_rgba(212,175,55,0.4)] active:scale-90 transition-all">
+<span class="material-symbols-outlined font-bold">arrow_upward</span>
+</button>
+</div>
+<div class="flex justify-center mt-3 gap-6">
+<div class="flex items-center gap-1 opacity-60">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: &quot;FILL&quot; 1;">bolt</span>
+<span class="text-[10px] uppercase font-bold tracking-widest">Model 4.0 Ultra</span>
+</div>
+<div class="flex items-center gap-1 opacity-60">
+<span class="material-symbols-outlined text-[14px]">shield</span>
+<span class="text-[10px] uppercase font-bold tracking-widest">Secure Encryption</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Micro-interaction Scripts -->
+<script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const menuClose = document.getElementById('menu-close');
+        const sideNav = document.getElementById('side-nav');
+        const overlay = document.getElementById('sidebar-overlay');
+
+        function openMenu() {
+            sideNav.style.left = '0';
+            overlay.style.opacity = '1';
+            overlay.style.pointerEvents = 'auto';
+        }
+
+        function closeMenu() {
+            sideNav.style.left = '-320px';
+            overlay.style.opacity = '0';
+            overlay.style.pointerEvents = 'none';
+        }
+
+        menuToggle.addEventListener('click', openMenu);
+        menuClose.addEventListener('click', closeMenu);
+        overlay.addEventListener('click', closeMenu);
+
+        // Simple input interaction
+        const input = document.querySelector('input');
+        const chatContainer = input.parentElement;
+
+        input.addEventListener('focus', () => {
+            chatContainer.style.borderColor = '#f2ca50';
+            chatContainer.style.boxShadow = '0 0 20px rgba(242, 202, 80, 0.2)';
+        });
+
+        input.addEventListener('blur', () => {
+            chatContainer.style.borderColor = 'rgba(212, 175, 55, 0.3)';
+            chatContainer.style.boxShadow = '0 4px 30px rgba(0,0,0,0.5)';
+        });
+    </script>
+
+
+</body></html>
